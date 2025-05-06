@@ -1,25 +1,18 @@
-# backend/api/views.py
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from django.shortcuts import render
 
-@api_view(['POST'])
-def calculate_route(request):
-    """
-    Заглушка API для расчета маршрута
-    Возвращает фиктивную геолинию и стоимость
-    """
-    data = request.data
-    start_point = data.get('start')
-    end_point = data.get('end')
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .models import Zone, Geo, User
+from .serializers import ZoneSerializer, GeoSerializer, UserSerializer
 
-    # Здесь заглушка маршрута - в реальности будет расчет
-    fake_route = [
-        [start_point['lat'], start_point['lng']],
-        [end_point['lat'], end_point['lng']]
-    ]
-    fake_price = 150  # руб
+class ZoneViewSet(viewsets.ModelViewSet):
+    queryset = Zone.objects.all()
+    serializer_class = ZoneSerializer
 
-    return Response({
-        'route': fake_route,
-        'price': fake_price
-    })
+class GeoViewSet(viewsets.ModelViewSet):
+    queryset = Geo.objects.all()
+    serializer_class = GeoSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

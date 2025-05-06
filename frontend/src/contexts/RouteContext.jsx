@@ -2,6 +2,7 @@ import { createContext, useState } from 'react';
 
 export const RouteContext = createContext();
 
+
 export function RouteProvider({ children }) {
   const [filters, setFilters] = useState({});
   const [selectedPoints, setSelectedPoints] = useState([]);

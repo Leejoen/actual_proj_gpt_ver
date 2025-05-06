@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-blnoigm@ye)dhdukso-nwje5eh465!v-%la5flz+z^k!$3^jev'
+SECRET_KEY = 'django-insecure-ex!yob-h^+t#%zt-1xeanemh#lwgfvd0n!-7i(q1*t+zt+$o4-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'api',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -49,8 +49,10 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
+AUTH_USER_MODEL = 'api.User'
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -81,7 +83,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 # Настройки DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -89,6 +90,10 @@ REST_FRAMEWORK = {
     ),
 }
 
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Адрес вашего React-приложения
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -108,9 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Адрес вашего React-приложения
-]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
